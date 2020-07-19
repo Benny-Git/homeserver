@@ -3,7 +3,7 @@
 ## Packages to install
 
 ```bash
-sudo apt install pv
+sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zfstools-linux
 ```
 
 ## .bashrc
