@@ -1,9 +1,30 @@
 # Core Setup
 
+## Network and SSH
+
+Lately we used the server with dhcp and managed the "static" IP via the Unifi Controller. This is therefore obsolete:
+
+#### /etc/network/interfaces
+```
+#iface enp3s0 inet dhcp
+iface enp3s0 inet static
+    address 192.168.0.7
+    netmask 255.255.255.0
+    gateway 192.168.0.1
+    dns-nameservers 192.168.0.1
+```
+
+#### /etc/ssh/sshd_config
+
+```
+#PasswordAuthentication yes
+PasswordAuthentication no
+```
+
 ## Packages to install
 
 ```bash
-sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zfstools-linux
+sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zfstools-linux nfs-common nfs-kernel-server
 ```
 
 ## .bashrc
@@ -21,4 +42,13 @@ HISTIGNORE='ls:bg:fg:history'
 HISTTIMEFORMAT='%F %T '
 shopt -s cmdhist
 PROMPT_COMMAND='history -a'
+```
+
+## ZFS Share
+
+```
+sudo zfs set sharenfs="rw=@192.168.0.0/24" tank
+sudo zfs set sharesmb=on tank
+sudo smbpasswd -L -a bertow
+sudo smbpasswd -L -e bertow
 ```
