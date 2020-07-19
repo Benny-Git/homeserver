@@ -56,3 +56,20 @@ sudo zfs send -i tank/misc@2016-03-09 tank/misc@2020-07-19 | pv | sudo zfs recei
 ## Links
 
 - [A good tutorial](https://pthree.org/2012/04/17/install-zfs-on-debian-gnulinux/)
+
+## Repairing an issue with "Failed to load ZFS module stack."
+
+Link that this is taken from: https://github.com/zfsonlinux/zfs/issues/1155
+Get the version number of the registered modules:
+
+```bash
+# dkms status
+(eg: 0.6.0.90 for the daily ppa.)
+Try to build the modules manually:
+# dkms remove  -m zfs -v 0.6.0.90 --all
+# dkms remove  -m spl -v 0.6.0.90 --all
+# dkms add     -m spl -v 0.6.0.90
+# dkms add     -m zfs -v 0.6.0.90
+# dkms install -m spl -v 0.6.0.90
+# dkms install -m zfs -v 0.6.0.90
+```
