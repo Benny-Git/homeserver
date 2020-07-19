@@ -28,3 +28,7 @@ sudo zfs send tank/fotos@2014-05-02 | sudo zfs receive trekstor1/fotos
 sudo zfs send tank/fotos@2016-03-09 | pv | sudo zfs receive seagate1/fotos
 sudo zpool export trekstor1
 ```
+
+## Links
+
+- [A good tutorial](https://pthree.org/2012/04/17/install-zfs-on-debian-gnulinux/)
