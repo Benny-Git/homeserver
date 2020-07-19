@@ -47,6 +47,10 @@ tank/misc@2020-07-19            0      -   118G  -
 
 sudo zfs send -i tank/misc@2016-03-09 tank/misc@2020-07-19 | pv | sudo zfs receive seagate1/misc
 cannot receive incremental stream: destination seagate1/misc has been modified
+
+# So we will need to rollback seagate1 first:
+sudo zfs rollback seagate1/misc@2016-03-09
+sudo zfs send -i tank/misc@2016-03-09 tank/misc@2020-07-19 | pv | sudo zfs receive seagate1/misc
 ```
 
 ## Links
