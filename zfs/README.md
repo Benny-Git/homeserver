@@ -22,6 +22,8 @@ sudo zfs snapshot tank/fotos@2014-04-29
 
 #### External backup
 
+Backup disks: `seagate1`, `trekstor1`
+
 ```sh
 sudo zpool import trekstor1
 sudo zfs send tank/fotos@2014-05-02 | sudo zfs receive trekstor1/fotos
