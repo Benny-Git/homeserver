@@ -31,6 +31,11 @@ sudo zfs send tank/fotos@2016-03-09 | pv | sudo zfs receive seagate1/fotos
 sudo zpool export trekstor1
 ```
 
+```bash
+sudo zfs destroy seagate1/music -r
+sudo zfs send tank/music@2020-07-19 | pv | sudo zfs receive seagate1/music
+```
+
 Incremental backup:
 
 ```bash
