@@ -22,6 +22,8 @@ sudo zfs snapshot tank/fotos@2014-04-29
 
 #### External backup
 
+> Maybe `zfs send -L` is faster?
+
 Backup disks: `seagate1`, `trekstor1`
 
 ```sh
