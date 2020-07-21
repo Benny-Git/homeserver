@@ -29,6 +29,14 @@ sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zf
 
 ## .bashrc
 
+#### Bash Aliases
+
+```bash
+alias t='tmux new-session -A -s remote'
+alias mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
+alias mp3p='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(playlist_index)s-%(title)s.%(ext)s" --yes-playlist'
+```
+
 #### Bash History
 
 Some good advise and best practices from this site: https://sanctum.geek.nz/arabesque/better-bash-history/
