@@ -14,6 +14,12 @@ iface enp3s0 inet static
     dns-nameservers 192.168.0.1
 ```
 
+#### Generate SSH keys for accessing github
+
+```bash
+ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/github
+```
+
 #### /etc/ssh/sshd_config
 
 ```
