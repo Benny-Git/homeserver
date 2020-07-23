@@ -20,6 +20,13 @@ iface enp3s0 inet static
 ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/github
 ```
 
+Add to .ssh/config to use:
+
+```
+Host github.com
+  IdentityFile ~/.ssh/github
+```
+
 #### /etc/ssh/sshd_config
 
 ```
