@@ -37,7 +37,7 @@ PasswordAuthentication no
 ## Packages to install
 
 ```bash
-sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zfstools-linux nfs-common nfs-kernel-server
+sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zfstools-linux nfs-common nfs-kernel-server pdftk
 ```
 
 ## .bashrc
