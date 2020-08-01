@@ -16,8 +16,20 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=1000000
+HISTFILESIZE=1000000
+
+# ignore some commands for history
+HISTIGNORE='ls:bg:fg:history'
+
+# use timestamps in history
+HISTTIMEFORMAT='%F %T '
+
+# force commands that you entered on more than one line to be adjusted to fit on only one
+shopt -s cmdhist
+
+# store history right away, even for a crashed session
+PROMPT_COMMAND='history -a'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -119,3 +131,7 @@ fi
 function toh264() {
 	avconv -i $1 -c:v libx264 -c:s copy $1.h264.mkv
 }
+
+# vim >> nano
+export VISUAL=vim
+export EDITOR="$VISUAL"

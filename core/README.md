@@ -34,6 +34,19 @@ Host github.com
 PasswordAuthentication no
 ```
 
+## Remove Snaps
+
+Using [these instructions](https://www.kevin-custer.com/blog/disabling-snaps-in-ubuntu-20-04/):
+
+```bash
+snap list                    # shows snaps installed
+sudo snap remove <package>   # remove the installed snaps
+sudo snap remove lxd
+sudo snap remove core18
+sudo snap remove snapd
+sudo apt purge snapd         # remove snapd itself
+```
+
 ## Packages to install
 
 ```bash
