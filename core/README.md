@@ -50,7 +50,7 @@ sudo apt purge snapd         # remove snapd itself
 ## Packages to install
 
 ```bash
-sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux
+sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba-common-bin
 ```
 
 Not available anymore: `libav-tools`, `zfstools-linux`\
@@ -92,6 +92,16 @@ PROMPT_COMMAND='history -a'
 ```
 
 ## ZFS Share
+
+#### Import the pool first
+```bash
+sudo zpool import tank
+```
+
+If it was not exported on the old system, we need to force the import:
+```bash
+sudo zpool import -f tank
+```
 
 ```
 sudo zfs set sharenfs="rw=@192.168.0.0/24" tank
