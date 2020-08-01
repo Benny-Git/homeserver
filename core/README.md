@@ -50,11 +50,12 @@ sudo apt purge snapd         # remove snapd itself
 ## Packages to install
 
 ```bash
-sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk
+sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux
 ```
 
-Not available anymore: `libav-tools`, `zfstools-linux`
-Using `ffmpeg` instead of `avconv` for now: `sudo apt install ffmpeg`
+Not available anymore: `libav-tools`, `zfstools-linux`\
+Using `ffmpeg` instead of `avconv` for now: `sudo apt install ffmpeg`\
+Using `zfsutils-linux` instead of `zfstools-linux` now.
 
 ## DynDNS client
 
@@ -62,7 +63,7 @@ Using `ffmpeg` instead of `avconv` for now: `sudo apt install ffmpeg`
 sudo apt install ddclient
 ```
 
-Requires information from ddclient.conf. It's easiest to replace /etc/ddclient.conf with the one from this repo.
+Requires information from ddclient.conf. It's easiest to replace /etc/ddclient.conf with the one from this repo.\
 TODO: Add pasword to KeePass :)
 
 ## .bashrc
