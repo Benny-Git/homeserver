@@ -50,7 +50,7 @@ sudo apt purge snapd         # remove snapd itself
 ## Packages to install
 
 ```bash
-sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba-common-bin
+sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba-common-bin samba
 ```
 
 Not available anymore: `libav-tools`, `zfstools-linux`\
