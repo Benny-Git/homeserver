@@ -50,8 +50,19 @@ sudo apt purge snapd         # remove snapd itself
 ## Packages to install
 
 ```bash
-sudo apt install pv ddclient dos2unix jq libav-tools ncdu p7zip smartmontools zfstools-linux nfs-common nfs-kernel-server pdftk
+sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk
 ```
+
+Not available anymore: `libav-tools`, `zfstools-linux`
+
+## DynDNS client
+
+```bash
+sudo apt install ddclient
+```
+
+Requires information from ddclient.conf. It's easiest to replace /etc/ddclient.conf with the one from this repo.
+TODO: Add pasword to KeePass :)
 
 ## .bashrc
 
