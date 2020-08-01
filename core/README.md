@@ -54,6 +54,7 @@ sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-s
 ```
 
 Not available anymore: `libav-tools`, `zfstools-linux`
+Using `ffmpeg` instead of `avconv` for now: `sudo apt install ffmpeg`
 
 ## DynDNS client
 
