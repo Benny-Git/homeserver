@@ -110,3 +110,16 @@ sudo zfs set sharesmb=on tank
 sudo smbpasswd -L -a bertow
 sudo smbpasswd -L -e bertow
 ```
+
+## Docker
+Using [these instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository):
+```bash
+sudo apt install apt-transport-https ca-certificates gnupg-agent software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+sudo usermod -aG docker $USER
+newgrp docker
+```
