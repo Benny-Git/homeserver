@@ -111,6 +111,14 @@ sudo smbpasswd -L -a bertow
 sudo smbpasswd -L -e bertow
 ```
 
+Our printer doesn't like speak newer SMB versions, so accessing the share will only work with this addition to the `etc/samba/smb.conf` under the `workgroup = WORKGROUP` line:
+
+```ini
+server min protocol = NT1
+```
+
+Then restart smbd (`sudo systemctl restart smbd`)
+
 ## Docker
 Using [these instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository):
 ```bash
