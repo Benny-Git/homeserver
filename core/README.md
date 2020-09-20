@@ -51,7 +51,8 @@ sudo apt purge snapd         # remove snapd itself
 
 ```bash
 sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba python3-pip
-sudo -H pip3 install --upgrade youtube-dl
+#sudo -H pip3 install --upgrade youtube-dl
+sudo -H pip3 install --upgrade youtube-dlc
 ```
 
 Not available anymore: `libav-tools`, `zfstools-linux`\
@@ -67,14 +68,20 @@ sudo apt install ddclient
 Requires information from ddclient.conf. It's easiest to replace /etc/ddclient.conf with the one from this repo.\
 TODO: Add pasword to KeePass :)
 
+## Correct the timezone
+
+```bash
+sudo timedatectl set-timezone "Europe/Berlin"
+```
+
 ## .bashrc
 
 #### Bash Aliases
 
 ```bash
 alias t='tmux new-session -A -s remote'
-alias mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
-alias mp3p='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(playlist_index)s-%(title)s.%(ext)s" --yes-playlist'
+alias mp3='youtube-dlc -x --audio-format mp3 --audio-quality 0'
+alias mp3p='youtube-dlc -x --audio-format mp3 --audio-quality 0 -o "%(playlist_index)s-%(title)s.%(ext)s" --yes-playlist'
 ```
 
 #### Bash History
