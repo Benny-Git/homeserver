@@ -50,7 +50,7 @@ sudo apt purge snapd         # remove snapd itself
 ## Packages to install
 
 ```bash
-sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba python3-pip
+sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba python3-pip certbot
 #sudo -H pip3 install --upgrade youtube-dl
 sudo -H pip3 install --upgrade youtube-dlc
 ```
@@ -67,17 +67,6 @@ sudo apt install ddclient
 
 Requires information from ddclient.conf. It's easiest to replace /etc/ddclient.conf with the one from this repo.\
 TODO: Add pasword to KeePass :)
-
-## Certbot
-
-```bash
-sudo apt-get update
-sudo apt-get install software-properties-common
-sudo add-apt-repository universe
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install certbot
-```
 
 ## Correct the timezone
 
