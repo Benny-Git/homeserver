@@ -68,6 +68,17 @@ sudo apt install ddclient
 Requires information from ddclient.conf. It's easiest to replace /etc/ddclient.conf with the one from this repo.\
 TODO: Add pasword to KeePass :)
 
+## Certbot
+
+```bash
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot
+```
+
 ## Correct the timezone
 
 ```bash
