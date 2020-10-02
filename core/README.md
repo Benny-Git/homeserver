@@ -144,3 +144,17 @@ Add Docker Compose [from current releases](https://github.com/docker/compose/rel
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+
+## Add Certificates
+
+```bash
+sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d whoami.bertow.com --manual --preferred-challenges dns-01 certonly
+
+curl "https://www.duckdns.org/update?domains=XXXXXXXXX.duckdns.org&token=TTTTTTTT-TTTT-TTTT-TTTT-TTTTTTTTTTTT&txt=challenge-text-token"
+##check
+# remove
+curl "https://www.duckdns.org/update?domains=XXXXXXXXX.duckdns.org&token=TTTTTTTT-TTTT-TTTT-TTTT-TTTTTTTTTTTT&txt=challenge-text-token&clear=true"
+...
+
+```
+https://www.edvpfau.de/wildcard-zertifikat-mit-duckdns-erstellen/
