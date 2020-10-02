@@ -148,13 +148,16 @@ sudo chmod +x /usr/local/bin/docker-compose
 ## Add Certificates
 
 ```bash
+# start process
 sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d whoami.bertow.com --manual --preferred-challenges dns-01 certonly
 
+# create entry
 curl "https://www.duckdns.org/update?domains=XXXXXXXXX.duckdns.org&token=TTTTTTTT-TTTT-TTTT-TTTT-TTTTTTTTTTTT&txt=challenge-text-token"
-##check
+
+#check
+dig -t txt ha.bertow.com
+
 # remove
 curl "https://www.duckdns.org/update?domains=XXXXXXXXX.duckdns.org&token=TTTTTTTT-TTTT-TTTT-TTTT-TTTTTTTTTTTT&txt=challenge-text-token&clear=true"
-...
-
 ```
 https://www.edvpfau.de/wildcard-zertifikat-mit-duckdns-erstellen/
