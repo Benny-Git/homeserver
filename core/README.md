@@ -50,7 +50,7 @@ sudo apt purge snapd         # remove snapd itself
 ## Packages to install
 
 ```bash
-sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba python3-pip certbot
+sudo apt install pv dos2unix jq ncdu p7zip smartmontools nfs-common nfs-kernel-server pdftk ffmpeg zfsutils-linux samba python3-pip certbot eyed3
 #sudo -H pip3 install --upgrade youtube-dl
 sudo -H pip3 install --upgrade youtube-dlc
 ```
