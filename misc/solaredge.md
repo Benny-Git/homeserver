@@ -24,3 +24,4 @@ git clone https://github.com/nmakel/solaredge_modbus.git
 - [Python lib: solaredge_modbus](https://github.com/nmakel/solaredge_modbus)
 - [Home Assistant custom component: solaredge-modbus-hass](https://github.com/erikarenhill/solaredge-modbus-hass)
 - [SolarEdge InfluxDB monitor](https://github.com/salberin/Solaredge-influxdb)
+- [SolarEdge Sunspec Implementation](https://www.solaredge.com/sites/default/files/sunspec-implementation-technical-note.pdf)
