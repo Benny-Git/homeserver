@@ -147,6 +147,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ## Add Certificates
 
+### Manual steps
+
 ```bash
 # start process
 sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d whoami.bertow.com --manual --preferred-challenges dns-01 certonly
@@ -162,6 +164,11 @@ curl "https://www.duckdns.org/update?domains=XXXXXXXXX.duckdns.org&token=TTTTTTT
 ```
 https://www.edvpfau.de/wildcard-zertifikat-mit-duckdns-erstellen/
 
+### Easier steps with hook scripts (see below)
+
+```bash
+sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d whoami.bertow.com --manual-auth-hook=/etc/letsencrypt/duckdns/set_acme_challenge.sh --manual-cleanup-hook=/etc/letsencrypt/duckdns/cleanup_acme_challenge.sh --manual --preferred-challenges dns-01 certonly
+```
 
 ## Certificate renewal
 
