@@ -165,6 +165,8 @@ https://www.edvpfau.de/wildcard-zertifikat-mit-duckdns-erstellen/
 
 ## Certificate renewal
 
+Move [hook scripts](../scripts/duckdns) to /etc/letsencrypt/duckdns
+
 ```bash
 sudo certbot renew --manual-auth-hook=/etc/letsencrypt/duckdns/set_acme_challenge.sh --manual-cleanup-hook=/etc/letsencrypt/duckdns/cleanup_acme_challenge.sh --deploy-hook="docker-compose -f /tank/misc/docker/traefik/docker-compose.yaml restart"
 ```
