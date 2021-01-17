@@ -161,3 +161,11 @@ dig -t txt ha.bertow.com
 curl "https://www.duckdns.org/update?domains=XXXXXXXXX.duckdns.org&token=TTTTTTTT-TTTT-TTTT-TTTT-TTTTTTTTTTTT&txt=challenge-text-token&clear=true"
 ```
 https://www.edvpfau.de/wildcard-zertifikat-mit-duckdns-erstellen/
+
+
+## Certificate renewal
+
+```bash
+sudo certbot renew --manual-auth-hook=/etc/letsencrypt/duckdns/set_acme_challenge.sh --manual-cleanup-hook=/etc/letsencrypt/duckdns/cleanup_acme_challenge.sh --deploy-hook="docker-compose -f /tank/misc/docker/traefik/docker-compose.yaml restart"
+```
+https://www.edvpfau.de/automatische-erneuerung-der-letsencrypt-wildcard-zertifikate-mit-duckdns/
