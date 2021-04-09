@@ -175,6 +175,6 @@ sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d whoami.b
 Move [hook scripts](../scripts/duckdns) to /etc/letsencrypt/duckdns
 
 ```bash
-sudo certbot renew --manual-auth-hook=/etc/letsencrypt/duckdns/set_acme_challenge.sh --manual-cleanup-hook=/etc/letsencrypt/duckdns/cleanup_acme_challenge.sh --deploy-hook="docker-compose -f /tank/misc/docker/traefik/docker-compose.yaml restart"
+sudo certbot renew --manual-auth-hook=/etc/letsencrypt/duckdns/set_acme_challenge.sh --manual-cleanup-hook=/etc/letsencrypt/duckdns/cleanup_acme_challenge.sh --manual-public-ip-logging-ok --deploy-hook="docker-compose -f /tank/misc/docker/traefik/docker-compose.yaml restart"
 ```
 https://www.edvpfau.de/automatische-erneuerung-der-letsencrypt-wildcard-zertifikate-mit-duckdns/
