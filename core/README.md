@@ -61,6 +61,8 @@ Using `zfsutils-linux` instead of `zfstools-linux` now.
 
 ## DynDNS client
 
+Probably not needed anymore, as duckdns is done via Unifi Controller.
+
 ```bash
 sudo apt install ddclient
 ```
