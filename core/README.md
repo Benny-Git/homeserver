@@ -147,6 +147,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+Automatic cleanup:
+
+Run `crontab -e` and add `0 3 * * * /usr/bin/docker system prune -f`
+
 ## Add Certificates
 
 ### Manual steps
