@@ -184,3 +184,39 @@ Move [hook scripts](../scripts/duckdns) to /etc/letsencrypt/duckdns
 sudo certbot renew --manual-auth-hook=/etc/letsencrypt/duckdns/set_acme_challenge.sh --manual-cleanup-hook=/etc/letsencrypt/duckdns/cleanup_acme_challenge.sh --manual-public-ip-logging-ok --deploy-hook="docker-compose -f /tank/misc/docker/traefik/docker-compose.yaml restart"
 ```
 https://www.edvpfau.de/automatische-erneuerung-der-letsencrypt-wildcard-zertifikate-mit-duckdns/
+
+## Dropbox
+
+Setup to `/tank/misc/Dropbox` as instructed on https://www.linuxbabe.com/ubuntu/install-dropbox-headless-ubuntu-server
+```bash
+wget https://www.dropbox.com/download?plat=lnx.x86_64 -O dropbox-linux.tar.gz
+sudo mkdir /opt/dropbox/
+sudo tar xvf dropbox-linux.tar.gz --strip 1 -C /opt/dropbox
+sudo apt install libc6 libglapi-mesa libxdamage1 libxfixes3 libxcb-glx0 libxcb-dri2-0 libxcb-dri3-0 libxcb-present0 libxcb-sync1 libxshmfence1 libxxf86vm1
+ln -s /tank/misc/Dropbox ~/Dropbox
+/opt/dropbox/dropboxd
+```
+
+Sudo Add `/etc/systemd/system/dropbox.service`:
+```
+[Unit]
+Description=Dropbox Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=bertow
+ExecStart=/opt/dropbox/dropboxd
+ExecStop=/bin/kill -HUP $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable autostart:
+```bash
+sudo systemctl start dropbox
+sudo systemctl enable dropbox
+systemctl status dropbox
+```
