@@ -187,7 +187,7 @@ https://www.edvpfau.de/automatische-erneuerung-der-letsencrypt-wildcard-zertifik
 
 ## Dropbox
 
-Setup to `/tank/misc/Dropbox` as instructed on https://www.linuxbabe.com/ubuntu/install-dropbox-headless-ubuntu-server
+Setup to `/tank/misc/Dropbox` as instructed on https://www.linuxbabe.com/ubuntu/install-dropbox-headless-ubuntu-server and https://www.how2shout.com/linux/install-dropbox-gui-or-headless-on-ubuntu-20-04-lts/
 ```bash
 wget https://www.dropbox.com/download?plat=lnx.x86_64 -O dropbox-linux.tar.gz
 sudo mkdir /opt/dropbox/
@@ -206,9 +206,9 @@ After=network.target
 [Service]
 Type=simple
 User=bertow
-ExecStart=/opt/dropbox/dropboxd
-ExecStop=/bin/kill -HUP $MAINPID
-Restart=always
+ExecStart=/usr/bin/env "/home/bertow/.dropbox-dist/dropboxd"
+Restart=on-failure
+RestartSec=1
 
 [Install]
 WantedBy=multi-user.target
@@ -219,4 +219,10 @@ Enable autostart:
 sudo systemctl start dropbox
 sudo systemctl enable dropbox
 systemctl status dropbox
+```
+
+Install CLI tool:
+```bash
+sudo wget -O /usr/local/bin/dropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"
+sudo chmod +x /usr/local/bin/dropbox
 ```
