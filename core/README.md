@@ -1,5 +1,15 @@
 # Core Setup
 
+## Sleepiness
+
+For some reason, Ubuntu Server thinks it's fine to sleep after 20mins.\
+We fix that in `/etc/systemd/sleep.conf` by setting
+```
+[Sleep]
+AllowSuspend=no
+AllowSuspendThenHibernate=no
+```
+
 ## Network and SSH
 
 Lately we used the server with dhcp and managed the "static" IP via the Unifi Controller. This is therefore obsolete:
