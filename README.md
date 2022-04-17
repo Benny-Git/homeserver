@@ -6,3 +6,4 @@
 ### misc
 
 - [SolarEdge](misc/solaredge.md)
+- [Home Assistant](misc/homeassistant.md)
