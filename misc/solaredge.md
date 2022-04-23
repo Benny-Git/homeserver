@@ -16,7 +16,7 @@
 docker run -it --rm python bash
 pip3 install solaredge_modbus
 git clone https://github.com/nmakel/solaredge_modbus.git
-./example.py 192.168.1.137 15021
+./example.py 192.168.1.137 1502
 ```
 
 ## Links
