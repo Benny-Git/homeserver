@@ -60,6 +60,13 @@ sudo zfs rollback seagate1/misc@2016-03-09
 sudo zfs send -i tank/misc@2016-03-09 tank/misc@2020-07-19 | pv | sudo zfs receive seagate1/misc
 ```
 
+## Automatic snapshots
+
+We use `zfs-auto-snapshot` to manage automatic snapshots.\
+Install with `sudo apt install zfs-auto-snapshot`.\
+This creates several `zfs-auto-snapshot` entries in `/etc/cron.*/` which run on different intervals.
+
+
 ## Creating the pools
 
 ```bash
