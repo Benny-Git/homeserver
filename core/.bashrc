@@ -135,3 +135,8 @@ function toh264() {
 # vim >> nano
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+for file in ~/.bashrc.d/*.sh;
+do
+    source "$file"
+done
