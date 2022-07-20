@@ -66,6 +66,20 @@ We use `zfs-auto-snapshot` to manage automatic snapshots.\
 Install with `sudo apt install zfs-auto-snapshot`.\
 This creates several `zfs-auto-snapshot` entries in `/etc/cron.*/` which run on different intervals.
 
+## Disk usage check
+
+Inspired by [this reddit post](https://www.reddit.com/r/zfs/comments/w2ujc5/), it would be good to check disk usage if we run low. Snapshots can take up quite a bit of space.
+
+```bash
+zfs list -o space
+```
+
+We can also check the diff between snapshots:
+
+```bash
+sudo zfs diff tank/misc@2016-03-09 tank/misc@2017-05-13
+```
+
 
 ## Creating the pools
 
