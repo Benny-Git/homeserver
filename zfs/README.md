@@ -1,5 +1,20 @@
 # ZFS
 
+## Testing new disks
+
+```sh
+# run short test
+sudo smartctl -t short /dev/sdb
+
+# run long test
+sudo smartctl -t long /dev/sdb
+
+# show results
+sudo smartctl -l selftest /dev/sdb
+```
+
+- [Link with more information](https://www.thomas-krenn.com/de/wiki/SMART_Tests_mit_smartctl)
+
 ## Commonly used commands
 
 #### Status and Scrub
