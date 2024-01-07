@@ -107,7 +107,8 @@ sudo zpool create -f toshiba1 /dev/disk/by-id/usb-TOSHIBA_USB_3.5_-HDD_001c37ce-
 sudo zpool create -f seagate1 /dev/disk/by-id/ata-ST3000DM001-1ER166_Z5028Z7C
 
 sudo zpool create -f -o ashift=12 dozer /dev/disk/by-id/ata-WDC_WD8004FRYZ-01VAEB0_VY0H4T4M
-# later we should be able to attach with sudo zpool attach tank <existing_disk> <new_disk>
+# attach seconddisk later:
+sudo zpool attach dozer /dev/disk/by-id/ata-WDC_WD8004FRYZ-01VAEB0_VY0H4T4M /dev/disk/by-id/ata-WDC_WD8004FRYZ-01VAEB0_VY0MS5DM
 ```
 
 #### Enable compression:
