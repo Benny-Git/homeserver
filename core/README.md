@@ -163,6 +163,8 @@ Run `crontab -e` and add `0 3 * * * /usr/bin/docker system prune -f`
 
 ## Add Certificates
 
+First, create new CNAME entries in DNS for e.g. `whoami.bertow.com` and `_acme-challenge.whoami.bertow.com`.
+
 ### Manual steps
 
 ```bash
