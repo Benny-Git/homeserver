@@ -1,3 +1,4 @@
 0 3 * * * /usr/bin/docker system prune -f
 0 0 * * * /dozer/docker/influxdb/daily_report.sh
 30 0 * * * /dozer/docker/paperlessngx/trigger_export.sh
+0 4 * * * /dozer/docker/homeassistant/backups/cleanup_ha_backups.sh
