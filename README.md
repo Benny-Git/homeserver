@@ -2,6 +2,7 @@
 
 - [Core Setup](core)
 - [ZFS](zfs)
+- [Home Server Hardware](hardware)
 
 ### misc
 
