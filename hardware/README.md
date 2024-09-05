@@ -10,6 +10,8 @@
 - 1 PCIe 5 x16
 - 1 PCIe 4 x8
 - IPMI with ILO Module P65741-B21 incl. M.2 Slot
+  - Key M
+  - 2280 or 22110 or
 - Xeon E-2434
 - 1x 16GB DDR5 4400 (4 Slots in total)
 - 180W external Powersupply
@@ -23,3 +25,4 @@
 - [HPE Smart Choice Purchase Program – Supplemental QuickSpecs](https://support.hpe.com/hpesc/public/docDisplay?docId=a50009219enw&docLocale=en_US)
 - [QuickSpecs HPE ProLiant MicroServer Gen11](https://support.hpe.com/hpesc/public/docDisplay?docId=a50007028enw&docLocale=en_US)
 - [HPE ProLiant Cabling Matrix](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00001997en_us&docLocale=en_US)
+- [iLO Guides](https://www.hpe.com/support/ilo6)
