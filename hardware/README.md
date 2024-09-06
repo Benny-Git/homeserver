@@ -11,8 +11,8 @@
 - 1 PCIe 4 x8
 - IPMI with ILO Module P65741-B21 incl. M.2 Slot
   - Key M
-  - 2280 or 22110 or
-- Xeon E-2434
+  - 2280 or 22110
+- [Intel Xeon E-2434](https://ark.intel.com/content/www/us/en/ark/products/236192/intel-xeon-e-2434-processor-12m-cache-3-40-ghz.html)
 - 1x 16GB DDR5 4400 (4 Slots in total)
 - 180W external Powersupply
 
