@@ -19,10 +19,10 @@
 ## Documentation
 
 - https://www.hpe.com/info/microservergen11-docs
-- [HPE ProLiant MicroServer Gen11 User Guide](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003930en_us&docLocale=en_US)
-- [HPE ProLiant MicroServer Gen11 Maintenance and Service Guide](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003924en_us&docLocale=en_US)
+- [HPE ProLiant MicroServer Gen11 User Guide](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003930en_us&docLocale=en_US) ([Local](HPE_sd00003930en_us_HPE%20ProLiant%20MicroServer%20Gen11%20User%20Guide.pdf))
+- [HPE ProLiant MicroServer Gen11 Maintenance and Service Guide](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003924en_us&docLocale=en_US) ([Local](HPE_sd00003924en_us_HPE%20ProLiant%20MicroServer%20Gen11%20Maintenance%20and%20Service%20Guide.pdf))
 - [Extended Ambient Temperature Guidelines for HPE Gen11 Servers](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00002260en_us&docLocale=en_US)
-- [HPE Smart Choice Purchase Program – Supplemental QuickSpecs](https://support.hpe.com/hpesc/public/docDisplay?docId=a50009219enw&docLocale=en_US)
-- [QuickSpecs HPE ProLiant MicroServer Gen11](https://support.hpe.com/hpesc/public/docDisplay?docId=a50007028enw&docLocale=en_US)
+- [HPE Smart Choice Purchase Program – Supplemental QuickSpecs](https://support.hpe.com/hpesc/public/docDisplay?docId=a50009219enw&docLocale=en_US) ([Local](HPE_a50009219enw_HPE%20Smart%20Choice%20Purchase%20Program%20–%20Supplemental%20QuickSpecs.pdf))
+- [QuickSpecs HPE ProLiant MicroServer Gen11](https://support.hpe.com/hpesc/public/docDisplay?docId=a50007028enw&docLocale=en_US) ([Local](HPE_a50007028enw_HPE%20ProLiant%20MicroServer%20Gen11.pdf))
 - [HPE ProLiant Cabling Matrix](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00001997en_us&docLocale=en_US)
 - [iLO Guides](https://www.hpe.com/support/ilo6)
