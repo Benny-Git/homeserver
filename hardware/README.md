@@ -32,3 +32,48 @@
 - [QuickSpecs HPE ProLiant MicroServer Gen11](https://support.hpe.com/hpesc/public/docDisplay?docId=a50007028enw&docLocale=en_US) ([Local](HPE_a50007028enw_HPE%20ProLiant%20MicroServer%20Gen11.pdf))
 - [HPE ProLiant Cabling Matrix](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00001997en_us&docLocale=en_US)
 - [iLO Guides](https://www.hpe.com/support/ilo6)
+
+## NVMe optimization
+
+The NVMe runs with a sector size of 512B by default, which is also what it reports:
+
+```
+root@hulk:~# parted /dev/nvme0n1 unit s print
+Model: KINGSTON SFYRS1000G (nvme)
+Disk /dev/nvme0n1: 1953525168s
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start        End          Size        File system     Name  Flags
+ 1      2048s        1050623s     1048576s    fat32                 boot, esp
+ 2      1050624s     977612799s   976562176s  ext4
+ 3      977612800s   1040113663s  62500864s   linux-swap(v1)        swap
+ 4      1040113664s  1953523711s  913410048s
+```
+
+The _actual_ physical sector size should be 4K however, but by default the 512B-emulation mode is active. To check this:
+
+```
+root@hulk:~# nvme id-ns -H /dev/nvme0n1
+NVME Identify Namespace 1:
+...
+LBA Format  0 : Metadata Size: 0   bytes - Data Size: 512 bytes - Relative Performance: 0x2 Good (in use)
+LBA Format  1 : Metadata Size: 0   bytes - Data Size: 4096 bytes - Relative Performance: 0x1 Better
+```
+
+To reformat this, the following command can be used (*but it will erase the drive!*):
+
+```
+nvme format --lbaf=1 /dev/nvmeXnY
+```
+
+Potentially useful:
+```
+lsblk -td
+```
+
+Sources for the above:
+- https://bbs.archlinux.org/viewtopic.php?id=298493
+- https://bbs.archlinux.org/viewtopic.php?id=289806
+
