@@ -11,6 +11,7 @@
   - name: Install packages
     package:
       name:
+        - vim
         - hdparm
         - nvme-cli
         - parted
@@ -24,12 +25,48 @@
        #- nfs-kernel-server
         - pdftk
         - ffmpeg
-       #- zfsutils-linux
         - python3-pip
         - certbot
         - eyed3
         - yt-dlp
         - tmux
+        - linux-headers-amd64
+        - ca-certificates
+        - curl
+
+  - name: Get docker armored signature
+    get_url:
+      url: https://download.docker.com/linux/debian/gpg
+      dest: /etc/apt/keyrings/docker.asc
+      mode: a+r
+  - name: Add docker repository
+    apt_repository:
+      repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable
+      state: present
+  - name: Install docker
+    apt:
+      name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+      update_cache: yes
+  - name: Configure docker logging
+    copy:
+      src: docker.daemon.json
+      dest: /etc/docker/daemon.json
+      mode: '600'
+
+  - name: Add backport repository
+    apt_repository:
+      repo: deb http://deb.debian.org/debian bookworm-backports main contrib
+      state: present
+  - name: Install ZFS from backports
+    apt:
+      name: zfsutils-linux
+      default_release: stable-backports
+      update_cache: yes
 
   - name: Disable SSH root login
     lineinfile:
