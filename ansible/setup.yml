@@ -1,0 +1,49 @@
+---
+- name: Setup Homeserver
+  hosts: all
+  #gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: Update packages
+    apt:
+      update_cache: yes
+  - name: Install packages
+    package:
+      name:
+        - hdparm
+        - nvme-cli
+        - parted
+        - smartmontools
+        - pv
+        - jq
+        - dos2unix
+        - ncdu
+        - p7zip
+       #- nfs-common
+       #- nfs-kernel-server
+        - pdftk
+        - ffmpeg
+       #- zfsutils-linux
+        - python3-pip
+        - certbot
+        - eyed3
+        - yt-dlp
+        - tmux
+
+  - name: Disable SSH root login
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#PermitRootLogin'
+      line: 'PermitRootLogin no'
+  - name: Disable SSH password authentication
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#PasswordAuthentication yes'
+      line: 'PasswordAuthentication no'
+  - name: Set SSH AuthenticationMethods
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      state: present
+      line: 'AuthenticationMethods publickey'
+

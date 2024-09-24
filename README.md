@@ -1,6 +1,7 @@
 # homeserver
 
 - [Core Setup](core)
+- [Ansible Setup](ansible)
 - [ZFS](zfs)
 - [Home Server Hardware](hardware)
 
