@@ -35,6 +35,8 @@
 
 ## NVMe optimization
 
+### Sector size
+
 The NVMe runs with a sector size of 512B by default, which is also what it reports:
 
 ```
@@ -77,3 +79,21 @@ Sources for the above:
 - https://bbs.archlinux.org/viewtopic.php?id=298493
 - https://bbs.archlinux.org/viewtopic.php?id=289806
 
+### NVMe Speed
+
+Checking to see how the NVMe is connected, we see that it only has PCIe 3x1 speeds, instead of the 4x4 it would support:
+
+```
+root@hulk:~# lspci
+...
+03:00.0 Non-Volatile memory controller: Kingston Technology Company, Inc. KC3000/FURY Renegade NVMe SSD E18 (rev 01)
+
+root@hulk:~# lspci -vv -s 03:00.0
+...
+LnkCap: Port #0, Speed 16GT/s, Width x4, ASPM L1, Exit Latency L1 <64us
+...
+LnkSta: Speed 8GT/s (downgraded), Width x1 (downgraded)
+...
+```
+
+I guess this is just the limit of the iLO M.2 implementation.
