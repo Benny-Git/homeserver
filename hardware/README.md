@@ -33,6 +33,14 @@
 - [HPE ProLiant Cabling Matrix](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00001997en_us&docLocale=en_US)
 - [iLO Guides](https://www.hpe.com/support/ilo6)
 
+## Tickets and stuff
+
+- https://community.hpe.com/t5/proliant-servers-ml-dl-sl/m-2-not-working-with-ilo6-module-in-hpe-proliant-microserver/m-p/7226004
+- https://www.reddit.com/r/techsupport/comments/1fkge0b/m2_nvme_not_working_with_ilo6_module_in_hpe/
+- Bifurcation support: 5384954918
+- M.2 support: 5384702130
+- M.2 speed: 5385094192
+
 ## NVMe optimization
 
 ### Sector size
