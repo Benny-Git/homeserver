@@ -13,7 +13,7 @@
   - Key M
   - 2280 or 22110
 - [Intel Xeon E-2434](https://ark.intel.com/content/www/us/en/ark/products/236192/intel-xeon-e-2434-processor-12m-cache-3-40-ghz.html)
-- 1x 16GB DDR5 4400 (4 Slots in total)
+- 1x 16GB DDR5 ECC 4400 (4 UDIMM Slots in total, max 32GB each)
 - 180W external Powersupply
 - [Kingston Fury Renegade 1.0TB PCIe 4.0 NVMe M.2 (5 years warranty)](https://www.kingston.com/en/ssd/gaming/kingston-fury-renegade-nvme-m2-ssd?partnum=sfyrs%2F1000g)
   - Controller: Phison E18
