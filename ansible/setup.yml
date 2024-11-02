@@ -1,13 +1,21 @@
 ---
+# Todos:
+# - cronjobs
+# - ssh config
+# - dropbox
+# - ups
+# - h264 alias?
+
 - name: Setup Homeserver
   hosts: all
   #gather_facts: no
-  become: yes
+  #become: yes
   become_method: sudo
   tasks:
   - name: Update packages
     apt:
       update_cache: yes
+    become: true
   - name: Install packages
     package:
       name:
@@ -33,16 +41,19 @@
         - linux-headers-amd64
         - ca-certificates
         - curl
+    become: true
 
   - name: Get docker armored signature
     get_url:
       url: https://download.docker.com/linux/debian/gpg
       dest: /etc/apt/keyrings/docker.asc
       mode: a+r
+    become: true
   - name: Add docker repository
     apt_repository:
       repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable
       state: present
+    become: true
   - name: Install docker
     apt:
       name:
@@ -52,35 +63,126 @@
         - docker-buildx-plugin
         - docker-compose-plugin
       update_cache: yes
+    become: true
   - name: Configure docker logging
     copy:
       src: docker.daemon.json
       dest: /etc/docker/daemon.json
       mode: '600'
+    become: true
 
   - name: Add backport repository
     apt_repository:
       repo: deb http://deb.debian.org/debian bookworm-backports main contrib
       state: present
+    become: true
   - name: Install ZFS from backports
     apt:
       name: zfsutils-linux
       default_release: stable-backports
       update_cache: yes
+    become: true
 
   - name: Disable SSH root login
     lineinfile:
       path: /etc/ssh/sshd_config
       regexp: '^#PermitRootLogin'
       line: 'PermitRootLogin no'
+    become: true
   - name: Disable SSH password authentication
     lineinfile:
       path: /etc/ssh/sshd_config
       regexp: '^#PasswordAuthentication yes'
       line: 'PasswordAuthentication no'
+    become: true
   - name: Set SSH AuthenticationMethods
     lineinfile:
       path: /etc/ssh/sshd_config
       state: present
       line: 'AuthenticationMethods publickey'
+    become: true
+
+  - name: Generate SSH keypair for GitHub
+    openssh_keypair:
+      path: /home/bertow/.ssh/id_github
+      type: ed25519
+  - name: Read pubkey
+    slurp:
+      src: /home/bertow/.ssh/id_github.pub
+    register: pubkey
+  - name: Display pubkey
+    debug:
+      msg:
+        - "Add this key to GitHub:"
+        - "{{ pubkey['content'] | b64decode | trim }}"
+        - "https://github.com/settings/keys"
+  - name: Add GitHub pubkey
+    lineinfile:
+      path: /home/bertow/.ssh/known_hosts
+      # source: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
+      line: '{{ item }}'
+      create: true
+      mode: '600'
+    with_items:
+      - 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
+      - 'github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg='
+      - 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk='
+  - name: Add authorized SSH keys
+    lineinfile:
+      path: /home/bertow/.ssh/authorized_keys
+      line: '{{ item }}'
+      create: true
+      mode: '600'
+    with_items:
+      - 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQy/a/psCEW3O6BFMZqq+aMJpY1Bf1YPPTSJOw8gjyC bertow@asus'
+      - 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOf7E7DLojJh1ebXBJayAwDMy/yhQsOxUIZtMr/75Qr4 bertow@w500'
+      - 'ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHq4Wcfl53pDZfiXqeQWpNGflyZ1jH/K2A6xpfYKMCPuy7pLP6n1ITIbju3DnCdVie5NU/VyDaF49LNS9mubdd4= iPhone 13 Termius'
+      - 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILw5SYUyw/B8kgDfAtdXa0umeg0tvBPGoDjIpX7Fswv0 Macbook Work'
+
+  - name: Clone homeserver GitHub repo
+    git:
+      repo: git@github.com:Benny-Git/homeserver.git
+      dest: /home/bertow/homeserver
+      update: no
+      clone: true
+      key_file: /home/bertow/.ssh/id_github
+
+  - name: Add some bash aliases
+    lineinfile:
+      path: /home/bertow/.bash_aliases
+      line: '{{ item }}'
+      create: true
+      mode: '644'
+    with_items:
+      - "alias t='tmux new-session -A -s remote'"
+      - "alias mp3='youtube-dlc -x --audio-format mp3 --audio-quality 0'"
+      - "alias mp3p='youtube-dlc -x --audio-format mp3 --audio-quality 0 -o \"%(playlist_index)s-%(title)s.%(ext)s\" --yes-playlist'"
+      - "alias megadl='docker run --rm -v $(pwd):$(pwd)  -w $(pwd) megatools:local dl '"
+
+  - name: Add some bash defaults
+    lineinfile:
+      path: /home/bertow/.bashrc
+      line: '{{ item }}'
+    with_items:
+      - "export VISUAL=vim"
+      - "export EDITOR=vim"
+      - "shopt -s histappend"
+      - "HISTFILESIZE=1000000"
+      - "HISTSIZE=1000000"
+      - "HISTCONTROL=ignoreboth"
+      - "HISTIGNORE='ls:bg:fg:history'"
+      - "HISTTIMEFORMAT='%F %T '"
+      - "shopt -s cmdhist"
+      - "PROMPT_COMMAND='history -a'"
+
+  - name: Add vim defaults
+    lineinfile:
+      path: /home/bertow/.vimrc
+      line: '{{ item }}'
+      create: true
+      mode: '644'
+    with_items:
+      - "set shiftwidth=2"
+      - "set cursorline"
+      - "set autoindent"
 
