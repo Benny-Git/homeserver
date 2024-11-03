@@ -1,15 +1,6 @@
 ---
-# Todos:
-# - cronjobs
-# - ssh config
-# - dropbox
-# - ups
-# - h264 alias?
-
 - name: Setup Homeserver
   hosts: all
-  #gather_facts: no
-  #become: yes
   become_method: sudo
   tasks:
   - name: Update packages
@@ -29,8 +20,6 @@
         - dos2unix
         - ncdu
         - p7zip
-       #- nfs-common
-       #- nfs-kernel-server
         - pdftk
         - ffmpeg
         - python3-pip
@@ -41,6 +30,7 @@
         - linux-headers-amd64
         - ca-certificates
         - curl
+        - apcupsd
     become: true
 
   - name: Get docker armored signature
@@ -174,6 +164,7 @@
       - "HISTTIMEFORMAT='%F %T '"
       - "shopt -s cmdhist"
       - "PROMPT_COMMAND='history -a'"
+      - "function toh264() { ffmpeg -i $1 -c:v libx264 -c:s copy $1.h264.mkv ; }"
 
   - name: Add vim defaults
     lineinfile:
@@ -185,4 +176,122 @@
       - "set shiftwidth=2"
       - "set cursorline"
       - "set autoindent"
+
+  - name: Check if Dropbox is already installed
+    stat:
+      path: /opt/dropbox/dropboxd
+    register: dropbox
+  - name: Download Dropbox
+    get_url:
+      url: 'https://www.dropbox.com/download?plat=lnx.x86_64'
+      dest: /tmp/dropbox-linux.tar.gz
+    when: not dropbox.stat.exists
+  - name: Create Dropbox install directory
+    file:
+      path: /opt/dropbox
+      state: directory
+      mode: '755'
+    become: true
+    when: not dropbox.stat.exists
+  - name: Install Dropbox
+    unarchive:
+      remote_src: true
+      src: /tmp/dropbox-linux.tar.gz
+      dest: /opt/dropbox
+      extra_opts:
+        - "--strip-components=1"
+    become: true
+    when: not dropbox.stat.exists
+  - name: Link Dropbox directoy
+    file:
+      state: link
+      src: /dozer/misc/Dropbox
+      path: /home/bertow/Dropbox
+  - name: Prompt to link Dropbox
+    pause:
+      prompt: Link Dropbox by running /opt/dropbox/dropboxd -- Press return to continue. Press Ctrl+c and then "a" to abort
+    when: not dropbox.stat.exists
+  - name: Create Dropbox service
+    copy:
+      dest: /etc/systemd/system/dropbox.service
+      content: |
+        [Unit]
+        Description=Dropbox Daemon
+        After=network.target
+        
+        [Service]
+        Type=simple
+        User=bertow
+        ExecStart=/opt/dropbox/dropboxd
+        ExecStop=/bin/kill -HUP $MAINPID
+        Restart=always
+        
+        [Install]
+        WantedBy=multi-user.target
+    become: true
+  - name: Enable and start Dropbox service
+    systemd_service:
+      name: dropbox
+      state: started
+      daemon_reload: true
+      enabled: true
+    become: true
+
+  - name: Create crontab entry to remove unused docker containers, networks and images
+    cron:
+      name: docker prune
+      job: /usr/bin/docker system prune -f
+      minute: 0
+      hour: 3
+    become: true
+  - name: Create crontab entry to create daily powermeter report
+    cron:
+      name: powermeter
+      job: /dozer/docker/influxdb/daily_report.sh
+      minute: 0
+      hour: 0
+    become: true
+  - name: Create crontab entry to create daily paperless export
+    cron:
+      name: paperless export
+      job: /dozer/docker/paperlessngx/trigger_export.sh
+      minute: 30
+      hour: 0
+    become: true
+  - name: Create crontab entry to cleanup home assistant backups
+    cron:
+      name: ha backup cleanup
+      job: /dozer/docker/homeassistant/backups/cleanup_ha_backups.sh
+      minute: 0
+      hour: 4
+    become: true
+
+  - name: Configure APC UPS daemon 1/2
+    lineinfile: 
+      path: /etc/apcupsd/apcupsd.conf
+      line: UPSTYPE usb
+      regexp: '^UPSTYPE.*'
+    become: true
+    register: apc1
+  - name: Configure APC UPS daemon 2/2
+    lineinfile:
+      path: /etc/apcupsd/apcupsd.conf
+      line: DEVICE
+      regexp: '^DEVICE.+'
+    become: true
+    register: apc2
+  - name: Restart APC UPS daemon service
+    systemd_service:
+      name: apcupsd
+      state: restarted
+      enabled: true
+    become: true
+    when: (apc1 is changed) or (apc2 is changed)
+  - name: Gather apcaccess output
+    command: apcaccess
+    become: true
+    register: apcaccess
+  - name: Output apcaccess stdout
+    debug:
+      msg: '{{ apcaccess.stdout_lines }}'
 
