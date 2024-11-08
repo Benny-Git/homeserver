@@ -296,3 +296,12 @@
     debug:
       msg: '{{ apcaccess.stdout_lines }}'
 
+  - name: Configure eno3
+    copy:
+      dest: /etc/network/interfaces.d/eno3
+      content: |
+        # Configure our tertiary network interface
+        # to use dhcp
+        allow-hotplug eno3
+        iface eno3 inet dhcp
+    become: true
