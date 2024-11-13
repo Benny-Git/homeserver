@@ -305,3 +305,33 @@
         allow-hotplug eno3
         iface eno3 inet dhcp
     become: true
+
+  - name: Configure zed notifications in ntfy 1/3
+    lineinfile:
+      path: /etc/zfs/zed.d/zed.rc
+      line: ZED_NTFY_TOPIC=zfs
+      regexp: '^#?ZED_NTFY_TOPIC.+'
+    become: true
+    register: zed1
+  - name: Configure zed notifications in ntfy 2/3
+    lineinfile:
+      path: /etc/zfs/zed.d/zed.rc
+      line: ZED_NTFY_URL="https://ntfy.bertow.com"
+      regexp: '^#?ZED_NTFY_URL.+'
+    become: true
+    register: zed2
+  - name: Configure zed notifications in ntfy 3/3
+    lineinfile:
+      path: /etc/zfs/zed.d/zed.rc
+      line: ZED_NOTIFY_VERBOSE=1
+      regexp: '^#?ZED_NOTIFY_VERBOSE.+'
+    become: true
+    register: zed3
+  - name: Restart zed service
+    systemd_service:
+      name: zed
+      state: restarted
+      enabled: true
+    become: true
+    when: (zed1 is changed) or (zed2 is changed) or (zed3 is changed)
+
