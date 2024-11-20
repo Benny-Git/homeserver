@@ -105,3 +105,8 @@ LnkSta: Speed 8GT/s (downgraded), Width x1 (downgraded)
 ```
 
 I guess this is just the limit of the iLO M.2 implementation.
+
+# Rack
+
+Kab24 Netzwerkschrank 19 Zoll 15 HE schwarz Wandgehäuse  
+H:77 x B:60 x T:45cm 
