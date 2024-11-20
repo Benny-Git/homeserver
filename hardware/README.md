@@ -109,4 +109,19 @@ I guess this is just the limit of the iLO M.2 implementation.
 # Rack
 
 Kab24 Netzwerkschrank 19 Zoll 15 HE schwarz Wandgehäuse  
-H:77 x B:60 x T:45cm 
+> H:77 x B:60 x T:45cm  
+> IC44043  
+> Ideal für 19"-Anwendungen  
+> Maximale Traglast 60 kg  
+> Sicherheitsglastür kann um mehr als 180° geöffnet werden
+> Kabeleinführung auf der Ober- und Rückseite  
+> Kaltgewalzter, galvanisierter SPCC-Stahlrahmen mit bis zu 1,2 mm Stärke  
+> Antistatische Pulverbeschichtung auf allen Seiten  
+> Türanschlag links und rechts einsetzbar  
+> Einfach abzunehmende Seitenwände  
+> Lieferung vollständig montiert  
+> 3 Jahre Garantie  
+> 15 Höheneinheiten  
+> Farbe: Schwarz RAL9005  
+> Entspricht Norm: ANSI/EIA RS-310-D, IEC60297-2, DIN41494; Abschnitt 1; DIN41494; Abschnitt 7  
+> [Link](https://www.kab24.de/netzwerk/kab24-netzwerkschrank-19-zoll-15-he-schwarz-wandgehaeuse-h77-x-b60-x-t45cm.html)
