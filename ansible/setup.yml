@@ -25,7 +25,7 @@
         - python3-pip
         - certbot
         - eyed3
-        - yt-dlp
+          #- yt-dlp
         - tmux
         - linux-headers-amd64
         - ca-certificates
@@ -70,6 +70,13 @@
   - name: Install ZFS from backports
     apt:
       name: zfsutils-linux
+      default_release: stable-backports
+      update_cache: yes
+    become: true
+
+  - name: Install yt-dlp from backports
+    apt:
+      name: yt-dlp
       default_release: stable-backports
       update_cache: yes
     become: true
@@ -180,28 +187,18 @@
 
   - name: Check if Dropbox is already installed
     stat:
-      path: /opt/dropbox/dropboxd
+      path: /home/bertow/.dropbox-dist
     register: dropbox
   - name: Download Dropbox
     get_url:
       url: 'https://www.dropbox.com/download?plat=lnx.x86_64'
       dest: /tmp/dropbox-linux.tar.gz
     when: not dropbox.stat.exists
-  - name: Create Dropbox install directory
-    file:
-      path: /opt/dropbox
-      state: directory
-      mode: '755'
-    become: true
-    when: not dropbox.stat.exists
   - name: Install Dropbox
     unarchive:
       remote_src: true
       src: /tmp/dropbox-linux.tar.gz
-      dest: /opt/dropbox
-      extra_opts:
-        - "--strip-components=1"
-    become: true
+      dest: /home/bertow
     when: not dropbox.stat.exists
   - name: Link Dropbox directoy
     file:
@@ -223,7 +220,7 @@
         [Service]
         Type=simple
         User=bertow
-        ExecStart=/opt/dropbox/dropboxd
+        ExecStart=/home/bertow/.dropbox-dist/dropboxd
         ExecStop=/bin/kill -HUP $MAINPID
         Restart=always
         
@@ -237,6 +234,18 @@
       daemon_reload: true
       enabled: true
     become: true
+  - name: Download Dropbox CLI tool
+    get_url:
+      url: 'https://www.dropbox.com/download?dl=packages/dropbox.py'
+      dest: /home/bertow/.dropbox-dist/dropbox.py
+      mode: '755'
+  - name: Link Dropbox CLI tool to /usr/bin
+    file:
+      state: link
+      src: /home/bertow/.dropbox-dist/dropbox.py
+      path: /usr/bin/dropbox
+    become: true
+
 
   - name: Create crontab entry to remove unused docker containers, networks and images
     cron:
@@ -316,7 +325,7 @@
   - name: Configure zed notifications in ntfy 2/3
     lineinfile:
       path: /etc/zfs/zed.d/zed.rc
-      line: ZED_NTFY_URL="https://ntfy.bertow.com"
+      line: ZED_NTFY_URL="https://ntfy.i.bertow.com"
       regexp: '^#?ZED_NTFY_URL.+'
     become: true
     register: zed2
