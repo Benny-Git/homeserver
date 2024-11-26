@@ -1,0 +1,100 @@
+# resticprofile configuration file
+#
+# useful commands:
+# resticprofile --name hetzner backup
+# resticprofile --name passport1 snapshots
+# resticprofile --name seagate1 prune
+
+version: "1"
+
+default:
+  password-file: ./resticpw.txt
+  backup:
+    exclude:
+      - '/dozer/docker/homeassistant/config/'
+      - '/dozer/docker/immich/postgres/'
+      - '/dozer/docker/influxdb/chronograf/'
+      - '/dozer/docker/influxdb/grafana/'
+      - '/dozer/docker/influxdb/influxdb/'
+      - '/dozer/docker/paperlessngx/pgdata/'
+      - '/dozer/docker/paperlessngx/media/'
+      - '/dozer/docker/paperlessngx/redisdata/'
+      - '/dozer/docker/paperlessngx/data/'
+      - '/dozer/docker/scrutiny/influxdb/'
+      - '/dozer/docker/unifi-docker/unifi/'
+      - '/dozer/docker/unifi-docker/mongo/'
+      - '/dozer/docker/wireguard/wireguard/'
+      - '/dozer/docker/caddy/config/'
+      - '/dozer/docker/caddy/data/'
+      - '/dozer/docker/lego/desec_token'
+      - '/dozer/docker/lego/duckdns_token'
+      - '/dozer/docker/lego_ilo/desec_token'
+      - '/dozer/docker/lego_ilo/ilo_credentials'
+
+hetzner:
+  inherit: default
+  repository: sftp:hetzner:/home/restic-repo
+  backup:
+    verbose: true
+    source:
+    - "/dozer/misc"
+    - "/dozer/fotos"
+    check-after: true
+    tag:
+    - "hulk"
+  retention:
+    group-by: tags
+    before-backup: false
+    after-backup: true
+    keep-daily: 1
+    prune: true
+  forget:
+    prune: true
+
+passport1:
+  inherit: default
+  repository: /passport1/restic
+  backup:
+    verbose: true
+    source:
+    - "/dozer/docker"
+    - "/dozer/fotos"
+    - "/dozer/misc"
+    - "/dozer/movies"
+    - "/dozer/music"
+    - "/dozer/videos"
+    check-after: true
+    tag:
+    - "hulk"
+  retention:
+    group-by: tags
+    before-backup: false
+    after-backup: true
+    keep-daily: 1
+    prune: true
+  forget:
+    prune: true
+
+seagate1:
+  inherit: default
+  repository: /seagate1/restic
+  backup:
+    verbose: true
+    source:
+    - "/dozer/docker"
+    - "/dozer/fotos"
+    - "/dozer/misc"
+    - "/dozer/music"
+    - "/dozer/videos"
+    check-after: true
+    tag:
+    - "hulk"
+  retention:
+    group-by: tags
+    before-backup: false
+    after-backup: true
+    keep-daily: 1
+    prune: true
+  forget:
+    prune: true
+
