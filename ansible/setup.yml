@@ -17,6 +17,7 @@
         - smartmontools
         - pv
         - jq
+        - yq
         - dos2unix
         - ncdu
         - p7zip
@@ -25,7 +26,6 @@
         - python3-pip
         - certbot
         - eyed3
-          #- yt-dlp
         - tmux
         - linux-headers-amd64
         - ca-certificates
