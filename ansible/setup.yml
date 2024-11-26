@@ -32,6 +32,7 @@
         - curl
         - apcupsd
         - exiftool
+        - restic
     become: true
 
   - name: Get docker armored signature
@@ -303,6 +304,7 @@
     command: apcaccess
     become: true
     register: apcaccess
+    changed_when: false
   - name: Output apcaccess stdout
     debug:
       msg: '{{ apcaccess.stdout_lines }}'
@@ -345,4 +347,34 @@
       enabled: true
     become: true
     when: (zed1 is changed) or (zed2 is changed) or (zed3 is changed)
+
+  - name: Update restic
+    command: /usr/bin/restic self-update
+    become: true
+    register: restic_update
+    changed_when: '"successfully updated restic to version" in restic_update.stdout'
+
+  - name: Check if resticprofile is already installed
+    stat:
+      path: /usr/local/bin/resticprofile
+    register: resticprofile
+  - name: Download resticprofile
+    get_url:
+      url: 'https://github.com/creativeprojects/resticprofile/releases/download/v0.29.0/resticprofile_0.29.0_linux_amd64.tar.gz'
+      dest: /tmp/resticprofile.tar.gz
+    when: not resticprofile.stat.exists
+  - name: Install resticprofile
+    unarchive:
+      remote_src: true
+      src: /tmp/resticprofile.tar.gz
+      dest: /usr/local/bin
+      include:
+        - resticprofile
+    when: not resticprofile.stat.exists
+    become: true
+  - name: Update resticprofile
+    command: /usr/local/bin/resticprofile self-update --quiet
+    become: true
+    register: resticprofile_update
+    changed_when: '"Successfully updated to version" in resticprofile_update.stdout'
 
