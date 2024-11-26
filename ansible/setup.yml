@@ -184,6 +184,8 @@
       - "set shiftwidth=2"
       - "set cursorline"
       - "set autoindent"
+      - "syntax on"
+      - "colorscheme koehler"
 
   - name: Check if Dropbox is already installed
     stat:
