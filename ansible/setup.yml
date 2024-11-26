@@ -142,7 +142,7 @@
     git:
       repo: git@github.com:Benny-Git/homeserver.git
       dest: /home/bertow/homeserver
-      update: no
+      update: true
       clone: true
       key_file: /home/bertow/.ssh/id_github
 
@@ -377,4 +377,9 @@
     become: true
     register: resticprofile_update
     changed_when: '"Successfully updated to version" in resticprofile_update.stdout'
+  - name: Link resticprofile profiles.yaml
+    file:
+      state: link
+      src: /home/bertow/homeserver/ansible/files/profiles.yaml
+      path: /home/bertow/profiles.yaml
 
