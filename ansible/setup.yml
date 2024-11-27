@@ -382,4 +382,6 @@
       state: link
       src: /home/bertow/homeserver/ansible/files/profiles.yaml
       path: /home/bertow/profiles.yaml
+  - name: Create systemd backup schedules
+    command: /usr/local/bin/resticprofile schedule --all
 
