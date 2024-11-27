@@ -275,8 +275,8 @@
     cron:
       name: ha backup cleanup
       job: /dozer/docker/homeassistant/backups/cleanup_ha_backups.sh
-      minute: 0
-      hour: 4
+      minute: 30
+      hour: 1
     become: true
 
   - name: Configure APC UPS daemon 1/2
