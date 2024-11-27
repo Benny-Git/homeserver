@@ -44,6 +44,7 @@ hetzner:
   inherit: default
   repository: sftp:hetzner:/home/restic-repo
   backup:
+    schedule: '5:00'
     verbose: true
     source:
     - "/dozer/misc"
@@ -64,6 +65,7 @@ passport1:
   inherit: default
   repository: /passport1/restic
   backup:
+    schedule: '3:30'
     verbose: true
     source:
     - "/dozer/docker"
@@ -88,6 +90,7 @@ seagate1:
   inherit: default
   repository: /seagate1/restic
   backup:
+    schedule: '4:30'
     verbose: true
     source:
     - "/dozer/docker"
