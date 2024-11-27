@@ -30,6 +30,15 @@ default:
       - '/dozer/docker/lego/duckdns_token'
       - '/dozer/docker/lego_ilo/desec_token'
       - '/dozer/docker/lego_ilo/ilo_credentials'
+    send-after-fail:
+      method: POST
+      url: https://ntfy.i.bertow.com/backup
+      body: "Backup on ${PROFILE_NAME} ran into errors.\nError: ${ERROR}\nStderr: ${ERROR_STDERR}"
+      headers:
+        - name: Title
+          value: Backup ran into errors
+        - name: Tags
+          value: warning
 
 hetzner:
   inherit: default
