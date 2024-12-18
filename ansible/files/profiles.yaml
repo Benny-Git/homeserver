@@ -4,6 +4,8 @@
 # resticprofile --name hetzner backup
 # resticprofile --name passport1 snapshots
 # resticprofile --name seagate1 prune
+# resticprofile schedule --all
+
 
 version: "1"
 
