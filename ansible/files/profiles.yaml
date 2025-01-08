@@ -32,6 +32,7 @@ default:
       - '/dozer/docker/lego/duckdns_token'
       - '/dozer/docker/lego_ilo/desec_token'
       - '/dozer/docker/lego_ilo/ilo_credentials'
+      - '/dozer/docker/mediathekview/config'
     send-after-fail:
       method: POST
       url: https://ntfy.i.bertow.com/backup
