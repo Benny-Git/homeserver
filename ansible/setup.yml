@@ -33,6 +33,7 @@
         - apcupsd
         - exiftool
         - restic
+        - tcpdump
     become: true
 
   - name: Get docker armored signature
