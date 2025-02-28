@@ -159,6 +159,15 @@
       - "alias mp3p='youtube-dlc -x --audio-format mp3 --audio-quality 0 -o \"%(playlist_index)s-%(title)s.%(ext)s\" --yes-playlist'"
       - "alias megadl='docker run --rm -v $(pwd):$(pwd)  -w $(pwd) megatools:local dl '"
 
+  - name: Remove default bash history settings
+    lineinfile:
+      path: /home/bertow/.bashrc
+      regexp: '{{ item }}'
+      state: absent
+    with_items:
+      - "^HISTSIZE=.*"
+      - "^HISTFILESIZE=.*"
+
   - name: Add some bash defaults
     lineinfile:
       path: /home/bertow/.bashrc
