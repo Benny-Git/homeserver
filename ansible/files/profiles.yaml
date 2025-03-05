@@ -13,6 +13,8 @@ default:
   password-file: ./resticpw.txt
   backup:
     exclude:
+      - '/dozer/docker/adguard/conf/'
+      - '/dozer/docker/adguard/work/'
       - '/dozer/docker/homeassistant/config/'
       - '/dozer/docker/immich/postgres/'
       - '/dozer/docker/influxdb/chronograf/'
