@@ -83,6 +83,18 @@
       update_cache: yes
     become: true
 
+  - name: Add contrib repository
+    apt_repository:
+      repo: deb http://deb.debian.org/debian bookworm main contrib
+      state: present
+    become: true
+  - name: Install zfs-auto-snapshot from backports
+    apt:
+      name: zfs-auto-snapshot
+      #default_release: stable-backports
+      update_cache: yes
+    become: true
+
   - name: Disable SSH root login
     lineinfile:
       path: /etc/ssh/sshd_config
