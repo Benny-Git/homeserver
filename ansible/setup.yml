@@ -307,6 +307,13 @@
       minute: 30
       hour: 1
     become: true
+  - name: Create crontab entry to create webtrees backups
+    cron:
+      name: webtrees backups
+      job: /dozer/docker/webtrees/mariadb_backup.sh
+      minute: 30
+      hour: 1
+    become: true
 
   - name: Configure APC UPS daemon 1/2
     lineinfile: 
