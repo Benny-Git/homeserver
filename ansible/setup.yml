@@ -34,6 +34,7 @@
         - exiftool
         - restic
         - tcpdump
+	- python3-venv
     become: true
 
   - name: Get docker armored signature
