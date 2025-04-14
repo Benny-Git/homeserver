@@ -35,6 +35,7 @@
         - restic
         - tcpdump
 	- python3-venv
+	- whois
     become: true
 
   - name: Get docker armored signature
