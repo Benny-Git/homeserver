@@ -34,6 +34,7 @@
         - exiftool
         - restic
         - tcpdump
+        - whois
 	- python3-venv
 	- whois
     become: true
