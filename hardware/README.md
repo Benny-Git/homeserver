@@ -32,7 +32,7 @@
 - [QuickSpecs HPE ProLiant MicroServer Gen11](https://support.hpe.com/hpesc/public/docDisplay?docId=a50007028enw&docLocale=en_US) ([Local](HPE_a50007028enw_HPE%20ProLiant%20MicroServer%20Gen11.pdf))
 - [HPE ProLiant Cabling Matrix](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00001997en_us&docLocale=en_US)
 - [iLO Guides](https://www.hpe.com/support/ilo6)
-- [Server memory population rules](https://www.hpe.com/psnow/doc/a50010188enw)
+- [Server memory population rules](https://www.hpe.com/psnow/doc/a50010188enw) ([Local](Server_memory_population_rules_for_HPE_ProLiant_Gen11_Servers_with_Intel_Xeon_E-2400_processors-a50010188enw.pdf))
 
 ## Tickets and stuff
 
