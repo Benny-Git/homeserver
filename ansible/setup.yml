@@ -35,8 +35,9 @@
         - restic
         - tcpdump
         - whois
-	- python3-venv
-	- whois
+        - python3-venv
+        - whois
+        - ntp
     become: true
 
   - name: Get docker armored signature
@@ -425,4 +426,30 @@
       path: /home/bertow/profiles.yaml
   - name: Create systemd backup schedules
     command: /usr/local/bin/resticprofile schedule --all
+
+  - name: Configure ntp servers
+    become: true
+    lineinfile:
+      path: /etc/ntpsec/ntp.conf
+      line: '{{ item }}'
+    with_items:
+      - pool 0.de.pool.ntp.org iburst
+      - pool 1.de.pool.ntp.org iburst
+      - pool 2.de.pool.ntp.org iburst
+      - pool 3.de.pool.ntp.org iburst
+
+  - name: Configure ntp listen
+    become: true
+    lineinfile:
+      path: /etc/ntpsec/ntp.conf
+      line: '{{ item }}'
+    with_items:
+      - interface listen ipv4
+
+  - name: Restart ntpd
+    systemd_service:
+      name: ntpsec
+      state: restarted
+      enabled: true
+    become: true
 
