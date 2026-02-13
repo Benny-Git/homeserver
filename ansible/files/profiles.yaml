@@ -66,9 +66,9 @@ hetzner:
   forget:
     prune: true
 
-passport1:
+passport2:
   inherit: default
-  repository: /passport1/restic
+  repository: /passport2/restic
   backup:
     schedule: '3:30'
     verbose: true
