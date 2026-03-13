@@ -38,6 +38,7 @@
         - python3-venv
         - whois
         - ntp
+	- sysstat
     become: true
 
   - name: Get docker armored signature
