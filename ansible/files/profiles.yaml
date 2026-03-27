@@ -35,6 +35,7 @@ default:
       - '/dozer/docker/lego_ilo/desec_token'
       - '/dozer/docker/lego_ilo/ilo_credentials'
       - '/dozer/docker/mediathekview/config'
+      - '/dozer/docker/jellyfin/cache/transcodes'
     send-after-fail:
       method: POST
       url: https://ntfy.i.bertow.com/backup
@@ -66,19 +67,45 @@ hetzner:
   forget:
     prune: true
 
-passport2:
+passport2_nc:
   inherit: default
-  repository: /passport2/restic
+  repository: /passport2/restic_nc
+  compression: off
+  pack-size: 128
+  no-cache: true
+  #option: "local.connections=1"
   backup:
     schedule: '3:30'
     verbose: true
+    read-concurrency: 1
     source:
-    - "/dozer/docker"
     - "/dozer/fotos"
-    - "/dozer/misc"
     - "/dozer/movies"
     - "/dozer/music"
     - "/dozer/videos"
+    check-after: true
+    tag:
+    - "hulk"
+  retention:
+    group-by: tags
+    before-backup: false
+    after-backup: true
+    keep-daily: 1
+    prune: true
+  forget:
+    prune: true
+
+passport2_c:
+  inherit: default
+  repository: /passport2/restic_c
+  pack-size: 128
+  no-cache: true
+  backup:
+    schedule: '2:30'
+    verbose: true
+    source:
+    - "/dozer/docker"
+    - "/dozer/misc"
     check-after: true
     tag:
     - "hulk"
