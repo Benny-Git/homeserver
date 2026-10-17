@@ -21,6 +21,7 @@
         - dos2unix
         - ncdu
         - p7zip
+        - 7zip
         - pdftk
         - ffmpeg
         - python3-pip
@@ -38,8 +39,7 @@
         - python3-venv
         - whois
         - ntp
-	- sysstat
-    become: true
+        - sysstat
 
   - name: Get docker armored signature
     get_url:
@@ -77,14 +77,14 @@
   - name: Install ZFS from backports
     apt:
       name: zfsutils-linux
-      default_release: stable-backports
+      default_release: bookworm-backports
       update_cache: yes
     become: true
 
   - name: Install yt-dlp from backports
     apt:
       name: yt-dlp
-      default_release: stable-backports
+      default_release: bookworm-backports
       update_cache: yes
     become: true
 
@@ -96,7 +96,7 @@
   - name: Install zfs-auto-snapshot from backports
     apt:
       name: zfs-auto-snapshot
-      #default_release: stable-backports
+      #default_release: bookworm-backports
       update_cache: yes
     become: true
 
@@ -454,4 +454,22 @@
       state: restarted
       enabled: true
     become: true
+
+  - name: Configure IPv6 router advertisement and forwarding settings (needed for Matter over Thread)
+    become: true
+    sysctl:
+      name: "{{ item.name }}"
+      value: "{{ item.value }}"
+      state: present
+      sysctl_file: /etc/sysctl.d/99-ipv6-routing.conf
+      reload: true
+    loop:
+      - name: net.ipv6.conf.eno3.accept_ra
+        value: "2"
+      - name: net.ipv6.conf.eno1.accept_ra_rt_info_max_plen
+        value: "64"
+      - name: net.ipv6.conf.eno3.accept_ra_rt_info_max_plen
+        value: "64"
+      - name: net.ipv6.conf.all.forwarding
+        value: "1"
 
