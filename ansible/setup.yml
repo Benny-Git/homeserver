@@ -8,6 +8,7 @@
       update_cache: yes
     become: true
   - name: Install packages
+    become: true
     package:
       name:
         - vim
@@ -40,6 +41,7 @@
         - whois
         - ntp
         - sysstat
+        - ansible
 
   - name: Get docker armored signature
     get_url:
